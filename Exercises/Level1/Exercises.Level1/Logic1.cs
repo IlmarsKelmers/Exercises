@@ -13,13 +13,27 @@ public class Logic1
     /// inclusive.Unless it is the weekend, in which case there is no upper bound on the number of cigars. 
     /// Return true if the party with the given values is successful, or false otherwise.
     /// 
-    /// cigarParty(30, false) → false
-    /// cigarParty(50, false) → true
+    /// Kad vāveres sanāk kopā uz ballīti, viņām patīk cigārus.
+    /// Vāveres ballīte ir veiksmīga, ja cigāru skaits ir no 40 līdz 60,
+    /// ieskaitot. Ja vien tā nav nedēļas nogale, tādā gadījumā cigāru skaitam nav augšējās robežas.
+    /// Atgriež true, ja puse ar norādītajām vērtībām ir veiksmīga, vai false citādi.
+    /// 
+    /// cigarParty(30, false) → false // cigars 30 vērtība ir false un jāatgriež false
+    /// cigarParty(50, false) → true // cigars 50 vērtība ir false un jāatgriež true
     /// cigarParty(70, true) → true
     /// </summary>
     public bool CigarParty(int cigars, bool isWeekend)
     {
-        throw new NotImplementedException();
+        // 1. Ja cigāru skaits ir zem 40 tad atgriežam false
+        // 2. Ja ir brīvdiena, tad atgriežam vērtību true
+        // 3. Ja cigāru skaits ir zem 60 tad atgriežam vērtību true (zinām jau, ka nav brīvdiena) <= jo tekstā rakstīts i
+        if (cigars >= 40 && (isWeekend || cigars <= 60))
+        {
+            return true;
+        }
+
+        // 4. Visos citos gadījumos atgiemžam false
+        return false;
     }
 
     /// <summary>
@@ -30,13 +44,38 @@ public class Logic1
     /// exception that if either of you has style of 2 or less, then the result is 0 (no). Otherwise
     /// the result is 1 (maybe).
     /// 
-    /// dateFashion(5, 10) → 2
+    /// /// Jūs un jūsu randiņš mēģināt dabūt galdiņu restorānā. Parametrs "jūs" ir
+    /// jūsu apģērba stilīgums, diapazonā 0..10, un "randiņš" ir jūsu randiņa stilīgums
+    /// drēbes. Tabulas iegūšanas rezultāts tiek kodēts kā int vērtība ar 0 = nē, 1 = varbūt,
+    /// 2=jā. Ja kāds no jums ir ļoti stilīgs, 8 vai vairāk, tad rezultāts ir 2 (jā). Ar
+    /// izņēmums, ja kādam no jums ir stils 2 vai mazāk, tad rezultāts ir 0 (nē). Citādi
+    /// rezultāts ir 1 (varbūt).
+    /// 
+    /// stilīgums 0-10
+    /// 0 = no
+    /// 1 = maybe
+    /// 2 = Yes
+    /// 8 <= result 2 Yes
+    /// <= 2 tad ir 0 nē
+    /// 
+    /// dateFashion(5, 10) → 2 // 5 vērtība ir 10 un jāatgriež 2
     /// dateFashion(5, 2) → 0
     /// dateFashion(5, 5) → 1
     /// </summary>
     public int DateFashion(int you, int date)
     {
-        throw new NotImplementedException();
+        // 1. Ja kāds ir 2 vai mazāk, tad atgriežam vērtību 0 "With the exception"
+        if (you <= 2 || date <= 2)
+        {
+            return 0;
+        }
+        // 2. Ja kāds ir ar 8 vai vairāk, tad atgiežam vērtību 2
+        if (you >= 8 || date >= 8)
+        {
+            return 2;
+        }
+        // 3. Citādi atgriežam vērtību 1
+        return 1;
     }
 
     /// <summary>
@@ -51,7 +90,27 @@ public class Logic1
     /// </summary>
     public bool SquirrelPlay(int temp, bool isSummer)
     {
-        throw new NotImplementedException();
+        // 1. Ja temperatūra ir virs 60 un zem 90 NAV VASARA tad atgriežam vērtību true (>= "=" nozōimē inklusiv
+        if (temp < 60)
+        {
+            return false;
+        }
+
+        int maxTemp = 90;
+
+        if (isSummer)
+
+        {
+            maxTemp += 10;
+        }
+
+        // 2. Ja temperatūra ir virs 60 un zem 100 un ir VASARA tad atgriežam vērtību true
+        if (temp <= maxTemp)
+        {
+            return true;
+        }
+        // 3. CITĀDI FALSE
+        return false;
     }
 
     /// <summary>
@@ -65,14 +124,40 @@ public class Logic1
     /// caughtSpeeding(65, false) → 1
     /// caughtSpeeding(65, true) → 0
     /// </summary>
+    ///  0 = nav biļete <60 = 0
+    ///  1 = maza no 61-80 = 1
+    ///  2 = liela >81
+    ///  
     public int CaughtSpeeding(int speed, bool isBirthday)
     {
-        throw new NotImplementedException();
+        // 1. Ja ātrums ir zem 60 tad atgriežam 0
+
+
+        if (speed < 61 || (speed < 66 && isBirthday == true))
+        {
+            return 0;
+        }
+
+        else if (speed >= 61 && speed <= 80 && isBirthday == false)
+        {
+            return 1;
+        }
+
+        else if (speed >= 66 && speed <= 85 && isBirthday == true)
+        {
+            return 1;
+        }
+        else
+            return 2;
     }
 
     /// <summary>
     /// Given 2 ints, a and b, return their sum. However, sums in the range 10..19 inclusive, are
     /// forbidden, so in that case just return 20.
+    /// 
+    /// Doti 2 ints, a un b, atgriež to summu. 
+    /// Tomēr summas diapazonā no 10..19 ieskaitot ir aizliegtas, 
+    /// tāpēc tādā gadījumā vienkārši atdodiet 20.
     /// 
     /// sortaSum(3, 4) → 7
     /// sortaSum(9, 4) → 20
@@ -80,7 +165,13 @@ public class Logic1
     /// </summary>
     public int SortaSum(int a, int b)
     {
-        throw new NotImplementedException();
+        int sum = a + b;
+
+        if (10 <= sum && sum <= 19)
+        {
+            return 20;
+        }
+        return sum;
     }
 
     /// <summary>
@@ -96,6 +187,22 @@ public class Logic1
     /// </summary>
     public string AlarmClock(int day, bool vacation)
     {
+        if (vacation && day == 0 || vacation && day == 6)
+        {
+            return "off";
+        }
+        if (vacation && day >= 1 || vacation && day < 6)
+        {
+            return "10:00";
+        }
+        if (!vacation && day == 0 || !vacation && day == 6)
+        {
+            return "10:00";
+        }
+        if (!vacation && day >= 1 || !vacation && day < 6)
+        {
+            return "7:00";
+        }
         throw new NotImplementedException();
     }
 
@@ -104,19 +211,37 @@ public class Logic1
     /// one is 6. Or if their sum or difference is 6. Note: the function Math.abs(num) computes the
     /// absolute value of a number.
     /// 
+    /// Skaitlis 6 ir patiešām lielisks skaitlis. 
+    /// Dotas divas int vērtības a un b, atgriež true, 
+    /// ja kāda no tām ir 6. Vai arī to summa vai starpība ir 6. 
+    /// Piezīme: funkcija Math.abs(num) aprēķina skaitļa absolūto vērtību.
+    /// 
     /// love6(6, 4) → true
     /// love6(4, 5) → false
     /// love6(1, 5) → true
     /// </summary>
     public bool Love6(int a, int b)
     {
-        throw new NotImplementedException();
+        // salīdzinām a un b ar skaitli 6 un atgriežam true
+
+        if (a == 6 || b == 6) ;
+        {
+            return false;
+        }
     }
+
 
     /// <summary>
     /// Given a number n, return true if n is in the range 1..10, inclusive. Unless outsideMode is
     /// true, in which case return true if the number is less or equal to 1, or greater or equal to
     /// 10.
+    /// 
+    /// Dots skaitlis n, atgriež patiesu, ja n ir diapazonā no 1..10, ieskaitot. 
+    /// Ja vien vērtība OutMode nav patiesa, šajā gadījumā atgriež true, 
+    /// ja skaitlis ir mazāks vai vienāds ar 1 vai lielāks vai vienāds ar 10.
+    /// 
+    /// n atgriež patiesu skaitli
+    /// n ir no 1-10
     /// 
     /// in1To10(5, false) → true
     /// in1To10(11, false) → false
@@ -124,17 +249,26 @@ public class Logic1
     /// </summary>
     public bool In1To10(int n, bool outsideMode)
     {
-        throw new NotImplementedException();
+        if (n <= 1 || n >= 10)
+        {
+            return false;
+        }
+        if (outsideMode == false) ;
+        {
+            return true;
+        }
     }
+}
 
-    /// <summary>
-    /// We'll say a number is special if it is a multiple of 11 or if it is one more than a multiple of
-    /// 11. Return true if the given non-negative number is special. Use the % "mod" operator.
-    /// 
-    /// specialEleven(22) → true
-    /// specialEleven(23) → true
-    /// specialEleven(24) → false
-    /// </summary>
+
+            /// <summary>
+            /// We'll say a number is special if it is a multiple of 11 or if it is one more than a multiple of
+            /// 11. Return true if the given non-negative number is special. Use the % "mod" operator.
+            /// 
+            /// specialEleven(22) → true
+            /// specialEleven(23) → true
+            /// specialEleven(24) → false
+            /// </summary>
     public bool SpecialEleven(int n)
     {
         throw new NotImplementedException();
