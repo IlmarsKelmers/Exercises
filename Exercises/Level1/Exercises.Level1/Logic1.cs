@@ -164,14 +164,22 @@ public class Logic1
     /// sortaSum(10, 11) → 21
     /// </summary>
     public int SortaSum(int a, int b)
+    // Aprēķinām a un b summu un pieglabājam vērtību jaunā mainīgajā, kurš saucās sum
+
     {
         int sum = a + b;
+        // Ja summa ir lielāka vai vienāda ar 10 vai mazāka vienāda ar 19
+        // tad atgriežam vērtību 20
 
-        if (10 <= sum && sum <= 19)
+
+        if (10 >= sum && sum <= 19)
         {
             return 20;
         }
+        // Visos citos gadījumos, kad neizpildās if nosacījums
+        // Tad atgriežam skaitļu summu
         return sum;
+
     }
 
     /// <summary>
@@ -222,13 +230,31 @@ public class Logic1
     /// </summary>
     public bool Love6(int a, int b)
     {
-        // salīdzinām a un b ar skaitli 6 un atgriežam true
-
-        if (a == 6 || b == 6) ;
+        if (a == 6 || b == 6)
         {
-            return false;
+            return true;
         }
+        if (a + b == 6)
+        {
+            return true;
+        }
+        // Aprēķinām a un b starpību un pieķirām vērtību subtracted mainīgajam
+        int subtracted = a - b;
+        // normalizējam starpību uz pozitīvu skaitli. -6 pārtop par 6
+        int diff = Math.Abs(subtracted);
+
+        // Ja skaitļu starpība ir 6
+        // Tad atgriežam vērtību true
+        if (diff == 6)
+        {
+            return true;
+        }
+
+        // Neesam atraduši nevienu pozitīvu 6 scenāriju
+        // Tad atgriežam vērtību false
+        return false;
     }
+
 
 
     /// <summary>
@@ -258,7 +284,7 @@ public class Logic1
             return true;
         }
     }
-}
+
 
 
             /// <summary>

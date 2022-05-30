@@ -9,8 +9,7 @@ public class Array2
 {
     /// <summary>
     ///  Return the number of even ints in the given array. Note: the % "mod" operator computes
-    ///  the remainder, e.g. 5 % 2 is 1.
-    /// 
+    ///  the remainder, e.g. 5 % 2 is 1
     /// countEvens([2, 1, 2, 3, 4]) → 3
     /// countEvens([2, 2, 0]) → 3
     /// countEvens([1, 3, 5]) → 0
@@ -47,8 +46,20 @@ public class Array2
     /// </summary>
     public int CenteredAverage(int[] nums)
     {
-        throw new NotImplementedException();
+        int sum = 0;
+
+        Array.Sort(nums);
+
+        for (int i = 1; i < nums.Length - 1; i++)
+        {
+            sum += nums[i];
+        }
+
+        int avarage = sum / (nums.Length - 2);
+
+        return avarage;
     }
+
 
     /// <summary>
     /// Return the sum of the numbers in the array, returning 0 for an empty array. Except the
@@ -61,7 +72,17 @@ public class Array2
     /// </summary>
     public int Sum13(int[] nums)
     {
-        throw new NotImplementedException();
+        int sum = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (nums[i] == 13)
+            {
+                i++;
+                continue;
+            }
+            sum += nums[i];
+        }
+        return sum;
     }
 
     /// <summary>
@@ -75,7 +96,29 @@ public class Array2
     /// </summary>
     public int Sum67(int[] nums)
     {
-        throw new NotImplementedException();
+        int sum = 0;
+        bool isIgnoring = false;
+
+        foreach (int num in nums)
+        {
+            if (num == 6)
+            {
+                isIgnoring = true;
+                continue;
+            }
+
+            if (num == 7 && isIgnoring)
+            {
+                isIgnoring = false;
+                continue;
+            }
+
+            if (!isIgnoring)
+            {
+                sum += num;
+            }
+        }
+        return sum;
     }
 
     /// <summary>

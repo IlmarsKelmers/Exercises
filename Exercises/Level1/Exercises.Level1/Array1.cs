@@ -19,8 +19,16 @@ public class Array1
     /// </summary>
     public bool FirstLast6(int[] nums)
     {
-        throw new NotImplementedException();
+        // 1. Izgūstam pirmo elementu
+        int first = nums[0];
+
+        // 2. Izgūstam pēdējo elementu 
+        int last = nums[nums.Length - 1];
+
+        // 3. Atgriežam vērtību true, ja kalt viens ir vienāds ar 6
+        return last == 6 || first == 6;
     }
+
 
     /// <summary>
     /// Given an array of ints, return true if the array is length 1 or more, and the first element
@@ -32,8 +40,20 @@ public class Array1
     /// </summary>
     public bool SameFirstLast(int[] nums)
     {
-        throw new NotImplementedException();
+        // 1. Ja masīvs ir īsāks par 1 tad atgriežam false
+        if (nums.Length == 0)
+        {
+            return false;
+        }
+
+        // 2. Izgūstam pirmo un pēdējo elementu
+        int first = nums[0];
+        int last = nums[nums.Length - 1];
+
+        // 3. Salīdzinām vai elementi ir vienādi
+        return first == last;
     }
+
 
     /// <summary>
     /// Return an int array length 3 containing the first 3 digits of pi, {3, 1, 4}.
@@ -42,7 +62,8 @@ public class Array1
     /// </summary>
     public int[] MakePi()
     {
-        throw new NotImplementedException();
+        int[] pi = { 3, 1, 4 };
+        return pi;
     }
 
     /// <summary>
@@ -55,8 +76,16 @@ public class Array1
     /// </summary>
     public bool CommonEnd(int[] a, int[] b)
     {
-        throw new NotImplementedException();
+        // 1. Izgūstam abu masīvu pirmos elementus un salīdzinam
+        //  Ja ir vienādi, tad atgriežam vērtību true
+        // 2. Izgūstam abu masīvu pēdējos elementus un salīdzinam
+        //  Ja ir vienādi, tad atgriežam vērtību true
+        // 3. citādi atgriežam vērtību false
+        return a[0] == b[0] || a[a.Length - 1] == b[b.Length - 1];
     }
+
+
+
 
     /// <summary>
     /// Given an array of ints length 3, return the sum of all the elements.
@@ -67,8 +96,19 @@ public class Array1
     /// </summary>
     public int Sum3(int[] nums)
     {
-        throw new NotImplementedException();
+        // 1. Piedefinējam mainīgo, kurā glabāsim summas vērtību
+        int sum = 0;
+
+        foreach (var item in nums)
+        {
+            // 2. Katrā iterācijā pieskai'tām sum mainīgajam katra elementa no masīva vērtību
+            sum += item;
+        }
+
+        // 3. Atgriežam summas mainīgo
+        return sum;
     }
+
 
     /// <summary>
     /// Given an array of ints length 3, return an array with the elements "rotated left" so {1, 2,
@@ -80,7 +120,15 @@ public class Array1
     /// </summary>
     public int[] RotateLeft3(int[] nums)
     {
-        throw new NotImplementedException();
+        // 1. Izveidojat jaunu masīvu un ieliekat vajadzīgajās vietās elementus
+        int[] result = new int[nums.Length];
+        result[0] = nums[1];
+        result[1] = nums[2];
+        result[2] = nums[0];
+
+        return result;
+
+        // *** 2. Atrisinīet šo ar ciklu tādā veidā, ka nebūtu nozīme cik elementi ir masīvā
     }
 
     /// <summary>
@@ -92,8 +140,11 @@ public class Array1
     /// reverse3([7, 0, 0]) → [0, 0, 7]
     /// </summary>
     public int[] Reverse3(int[] nums)
+    // Izveidojam jaunu masīvu vēlamajā secībā
     {
-        throw new NotImplementedException();
+        int[] result = { nums[2], nums[1], nums[0] };
+
+        return result;
     }
 
     /// <summary>
@@ -105,9 +156,31 @@ public class Array1
     /// maxEnd3([2, 11, 3]) → [3, 3, 3]
     /// </summary>
     public int[] MaxEnd3(int[] nums)
+
     {
-        throw new NotImplementedException();
+        // Izgūstam masīva pirmo elementu un saglabājam iekš mainīgā first
+        int first = nums[0];
+
+        // Izgūstam masīva pēdējo elementu un saglabājam iekš mainīgā last
+        int last = nums[nums.Length - 1];
+
+        int biggest = first;
+
+        if (first < last)
+        {
+            biggest = last;
+        }
+
+        // Nomainām katra masīva elementa vērtību uz atrasto lielāko vērtību
+        for (int i = 0; i < nums.Length; i++)
+        {
+            nums[i] = biggest;
+        }
+
+        // Atgriežam modificēto masīvu
+        return nums;
     }
+
 
     /// <summary>
     /// Given an array of ints, return the sum of the first 2 elements in the array. If the array
@@ -172,6 +245,7 @@ public class Array1
     {
         throw new NotImplementedException();
     }
+
 
     /// <summary>
     /// Given an int array, return a new array with double the length where its last element is the
